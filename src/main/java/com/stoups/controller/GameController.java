@@ -1,9 +1,14 @@
 package com.stoups.controller;
 
+import com.mashape.unirest.http.exceptions.UnirestException;
+import com.stoups.Request.GameDataRequest;
+import com.stoups.models.Game;
 import com.stoups.services.GameClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * Created by astouparenko on 4/11/2017.
@@ -18,10 +23,18 @@ public class GameController {
     GameClientService gameClient;
 
     @RequestMapping(value = "/top/{minScore}", method = RequestMethod.GET)
-    public @ResponseBody void getTopGames(@PathVariable int minScore){
+    public @ResponseBody
+    List<Game> getTopGames(@PathVariable int minScore) throws UnirestException {
 
-        gameClient.getGamesAboveScore(minScore);
+        return gameClient.getGamesAboveScore(minScore);
     }
 
+    @RequestMapping(value = "/fetch", method = RequestMethod.POST)
+    public @ResponseBody
+    List<Game> getGames(@RequestBody GameDataRequest gameDataRequest) throws UnirestException {
+
+        List<Game> games = gameClient.fetchSpecificGames(gameDataRequest);
+        return games;
+    }
 
 }

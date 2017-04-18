@@ -1,5 +1,8 @@
 package com.stoups.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -7,11 +10,21 @@ import java.util.Date;
  */
 public class Game {
 
+    @JsonProperty("name")
     private String title;
+
+    @JsonProperty("rating")
     private float score;
+
+
+    @JsonProperty("id")
     private int idValue;
+
+    @JsonProperty("created_at")
     private Date publishDate;
-    private String genre;
+
+    @JsonProperty("genres")
+    private ArrayList<Integer> genres;
 
     public String getTitle() {
         return title;
@@ -45,12 +58,12 @@ public class Game {
         this.publishDate = publishDate;
     }
     
-    public String getGenre() {
+    public ArrayList<Integer> getGenre() {
 
-        return genre;
+        return genres;
     }
 
-    public void setGenre(String genre) {
-        this.genre = genre;
+    public void setGenre(ArrayList<Integer> genre) {
+        this.genres = genre;
     }
 }

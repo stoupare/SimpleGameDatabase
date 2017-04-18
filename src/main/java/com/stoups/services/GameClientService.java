@@ -1,17 +1,15 @@
 package com.stoups.services;
 
-import com.stoups.models.EPType;
-import com.stoups.models.Game;
-
-import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.exceptions.UnirestException;
-import com.mashape.unirest.request.GetRequest;
-import org.json.JSONArray;
+import com.stoups.Request.GameDataRequest;
+import com.stoups.models.EPType;
+import com.stoups.models.FilterPostFix;
+import com.stoups.models.Game;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by astouparenko on 4/11/2017.
@@ -19,28 +17,35 @@ import java.util.List;
 @Service
 public class GameClientService {
 
-    public List<Game> getGamesAboveScore (int minScore) {
+    public List<Game> getGamesAboveScore (int minScore) throws UnirestException {
 
-        List<Game> gameList = new ArrayList<Game>();
+        ArrayList<Game> gameList = new ArrayList<Game>();
 
+        //Build the request
         RequestBuilder builder = new RequestBuilder();
-        builder.addLimit(15).sortbyDate().addFields("rating,name");
-        GetRequest request = builder.createGetRequest(EPType.GAMES);
-        try {
-            HttpResponse<JsonNode> response = request.asJson();
-            if (response.getBody() != null && response.getBody().isArray()){
-                JSONArray arr = response.getBody().getArray();
-                for (int i = 0; i < arr.length(); i++){
-                    Game game = (Game)arr.get(i);
-                    gameList.add(game);
-                }
+        builder.addLimit(15).sortbyDate().addFields("rating,name").addFilter("rating", FilterPostFix.gte, minScore);
+        builder.createGetRequest(EPType.GAMES);
 
-            }
-        } catch (UnirestException e) {
-            System.out.println("Could not fetch response from API. URL: " + request.getUrl());
-        }
+        gameList = builder.sendAndParseToList(gameList);
 
         return gameList;
+    }
+
+    public List<Game> fetchSpecificGames(GameDataRequest gameRequest) throws UnirestException {
+        int rows = gameRequest.getRows();
+        int offset = gameRequest.getOffset();
+        String q = gameRequest.getQuery();
+        ArrayList<String> genres = gameRequest.getGenres();
+        Map<FilterPostFix, String[]> filters = gameRequest.getFilterMap();
+
+        List<Game> games = new ArrayList<Game>();
+
+        RequestBuilder builder = new RequestBuilder();
+        builder.addLimit(rows).addOffset(offset).addSearch(q).
+                addData(gameRequest.getData()).addFiltersMap(filters).sortbyDate();
+
+        builder.createGetRequest(EPType.GAMES);
+        return builder.sendAndParseToList(games);
     }
 
 }
