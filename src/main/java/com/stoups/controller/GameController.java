@@ -22,6 +22,14 @@ public class GameController {
     @Autowired
     GameClientService gameClient;
 
+
+    @RequestMapping(value = "/game", method = RequestMethod.POST)
+    public @ResponseBody
+    Game getTopGames(@RequestBody GameDataRequest gameDataRequest) throws UnirestException {
+
+        return gameClient.findGame(gameDataRequest.getQuery());
+    }
+
     @RequestMapping(value = "/top/{minScore}", method = RequestMethod.GET)
     public @ResponseBody
     List<Game> getTopGames(@PathVariable int minScore) throws UnirestException {

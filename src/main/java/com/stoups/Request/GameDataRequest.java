@@ -2,6 +2,7 @@ package com.stoups.Request;
 
 import com.stoups.models.FilterPostFix;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -23,7 +24,7 @@ public class GameDataRequest {
 
     private List<String> data;
 
-    private List<String> Genres;
+    private ArrayList<String> genres;
 
     public List<String> getTitles() {
         return titles;
@@ -65,12 +66,12 @@ public class GameDataRequest {
         this.data = data;
     }
 
-    public List<String> getGenres() {
-        return Genres;
+    public ArrayList<String> getGenres() {
+        return genres;
     }
 
     public void setGenres(List<String> genres) {
-        Genres = genres;
+        genres = genres;
     }
 
     public String getQuery() {

@@ -7,9 +7,12 @@ import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import com.mashape.unirest.request.GetRequest;
+import com.stoups.configuration.Configuration;
 import com.stoups.models.EPType;
 import com.stoups.models.FilterPostFix;
 import org.json.JSONArray;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,7 +22,11 @@ import java.util.Map;
 /**
  * Created by astouparenko on 4/11/2017.
  */
+@Component
 public class RequestBuilder {
+
+    @Autowired
+    Configuration conf;
 
     private static String MAIN_HTTP = "https://igdbcom-internet-game-database-v1.p.mashape.com/";
 
@@ -32,7 +39,7 @@ public class RequestBuilder {
 
     private GetRequest addHeaders(GetRequest request) {
         return request
-                .header("X-Mashape-Key", "IWZQGvHrw3mshTdlSj42yNJLziamp1KJG2Rjsn1FNxW0RBGb7t")
+                .header("X-Mashape-Key", conf.getVgdbKey())
                 .header("Accept", "application/json");
     }
 
@@ -101,10 +108,10 @@ public class RequestBuilder {
         return this;
     }
 
-    public <T> ArrayList<T> sendAndParseToList(ArrayList<T> someList) throws UnirestException{
+    public <T> ArrayList<T> sendAndParseToList(ArrayList<T> someList, Class clazz) throws UnirestException{
         //Send the request and parse the response into a list of Games
         try {
-            HttpResponse<JsonNode> response = null;
+            HttpResponse<JsonNode> response;
 
                 response = request.asJson();
 
@@ -112,7 +119,8 @@ public class RequestBuilder {
                 JSONArray arr = response.getBody().getArray();
                 ObjectMapper objectMapper = new ObjectMapper();
                 TypeFactory t = TypeFactory.defaultInstance();
-                someList = objectMapper.readValue(arr.toString(), t.constructCollectionType(ArrayList.class, someList.getClass()));
+                System.out.println(someList.getClass().toGenericString());
+                someList = objectMapper.readValue(arr.toString(), t.constructCollectionType(ArrayList.class, clazz));
             }
 
         } catch (IOException e) {
