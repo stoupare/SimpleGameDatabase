@@ -9,15 +9,11 @@ import java.util.Map;
 /**
  * Created by Alex on 4/14/2017.
  */
-public class GameDataRequest {
+public class GameDataRequest extends BaseRequest {
 
     private String query;
 
     private List<String> titles;
-
-    private int offset;
-
-    private int rows;
 
     //Array maps as [{Field}, {Value}]
     private Map<FilterPostFix, String[]> filterMap;
@@ -26,28 +22,14 @@ public class GameDataRequest {
 
     private ArrayList<String> genres;
 
+    private Boolean includeLinks;
+
     public List<String> getTitles() {
         return titles;
     }
 
     public void setTitles(List<String> titles) {
         this.titles = titles;
-    }
-
-    public int getOffset() {
-        return offset;
-    }
-
-    public void setOffset(int offset) {
-        this.offset = offset;
-    }
-
-    public int getRows() {
-        return rows;
-    }
-
-    public void setRows(int rows) {
-        this.rows = rows;
     }
 
     public Map<FilterPostFix, String[]> getFilterMap() {
@@ -80,5 +62,13 @@ public class GameDataRequest {
 
     public void setQuery(String query) {
         this.query = query;
+    }
+
+    public Boolean getIncludeLinks() {
+        return includeLinks;
+    }
+
+    public void setIncludeLinks(Boolean includeLinks) {
+        this.includeLinks = includeLinks;
     }
 }

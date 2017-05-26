@@ -18,6 +18,8 @@ public class Configuration {
     @Value("${proj.api.keys.youtube}")
     private String youtubeKey;
 
+    @Value("${proj.api.keys.twitch}")
+    private String twitchKey;
 
     public String getVgdbKey() {
         return vgdbKey;
@@ -25,5 +27,9 @@ public class Configuration {
 
     public String getYoutubeKey() {
         return youtubeKey;
+    }
+
+    public String getTwitchKey() {
+        return twitchKey;
     }
 }

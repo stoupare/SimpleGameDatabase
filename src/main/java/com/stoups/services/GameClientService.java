@@ -5,6 +5,7 @@ import com.stoups.Request.GameDataRequest;
 import com.stoups.models.EPType;
 import com.stoups.models.FilterPostFix;
 import com.stoups.models.Game;
+import com.stoups.models.Video;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,6 +23,10 @@ public class GameClientService {
     @Autowired
     RequestBuilder builder;
 
+    @Autowired
+    VideoLinkCollector videoCollector;
+
+    public static int MAX_VIDEOS_PER_GAME = 5;
 
     public List<Game> getGamesAboveScore (int minScore) throws UnirestException {
 
@@ -32,6 +37,12 @@ public class GameClientService {
         builder.createGetRequest(EPType.GAMES);
 
         gameList = builder.sendAndParseToList(gameList, Game.class);
+
+        for (Game game : gameList) {
+            //Collect Twitch/Youtube Links
+            List<Video> videos = videoCollector.searchYoutubeVideos(game.getTitle(), "viewCount", MAX_VIDEOS_PER_GAME);
+            game.setVideos(videos);
+        }
 
         return gameList;
     }
@@ -49,7 +60,15 @@ public class GameClientService {
                 addData(gameRequest.getData()).addFiltersMap(filters).sortbyDate();
 
         builder.createGetRequest(EPType.GAMES);
-        return builder.sendAndParseToList(games, Game.class);
+        games = builder.sendAndParseToList(games, Game.class);
+
+        for (Game game : games) {
+            //Collect Twitch/Youtube Links
+            List<Video> videos = videoCollector.searchYoutubeVideos(game.getTitle(), "viewCount", MAX_VIDEOS_PER_GAME);
+            game.setVideos(videos);
+        }
+
+        return games;
     }
 
     public Game findGame(String searchTerm) {
