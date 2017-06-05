@@ -8,4 +8,5 @@ API/dependency-reduced-pom.xml
 API/buildNumber.properties
 API/.mvn/timing.properties
 API/.idea/*
+.idea/*
 API/src/main/java/resources/app.properties
