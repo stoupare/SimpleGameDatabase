@@ -10,3 +10,4 @@ API/.mvn/timing.properties
 API/.idea/*
 .idea/*
 API/src/main/java/resources/app.properties
+Web/src/node_modules/*
