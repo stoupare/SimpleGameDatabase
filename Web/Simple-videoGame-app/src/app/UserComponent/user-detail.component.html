@@ -1,0 +1,9 @@
+    <div *ngIf="user">
+      
+      <!-- Basic Profile Information. Will contain profile image, username, contributor score?, favourite channels? etc. -->
+      <img class = "user-detail-image" src = "/../assets/images/navbar/user-icon.png"> 
+      <h2 class = "user-detail-user">{{user.name}} Profile!</h2>
+      <div class = "user-cont-score"><label>Contributor Score: </label>{{user.score}}</div>
+      <div class = "user-det-fav-chan"><label>Favorite Channels: </label><p ng-repeat ="channel in user.channels">{{channel}}</div>
+
+    </div>

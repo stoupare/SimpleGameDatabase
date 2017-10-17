@@ -1,0 +1,49 @@
+.user-icon {
+	background-color: #e7ecf0;
+	display: inline-block;
+
+}
+
+.user-nav-bar {
+	display: inline-block;
+	width: 100%;
+
+}
+
+.user-navbar-data {
+	display: inline-block;
+}
+
+.user-icon-image {
+	width: 64px;
+	height: 64px;
+	border-radius: 64px;
+	border: 3px solid black;
+	background-image: url("/../assets/images/navbar/user-icon.png");  //Temporary
+	display: inline-block;
+}
+
+.user-name {
+	display: inline-block;
+	vertical-align: top;
+	font-size: medium;
+
+}
+
+.hp {
+	width: 200px;
+	height: 15px;
+	background-color: red;
+	border: 3px solid grey;
+}
+
+.mp {
+	width: 200px;
+	height: 15px;
+	background-color: blue;
+	border: 3px solid grey;
+}
+
+.user-controls {
+	float:right;
+}

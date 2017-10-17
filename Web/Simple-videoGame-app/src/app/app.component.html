@@ -1,0 +1,22 @@
+<!-- Top User Info Nav Bar !!!! NOTE SEPERATE THIS OFF TO IT'S OWN COMPONENT!!! -->
+<nav-bar [user] = "{ 'name': 'USER_NAME', 'score': 3, 'level': 10 }"></nav-bar>
+
+<!-- Ends Here -->
+
+<!-- This is the user's Stats Page, move to user Detail Probabaly, main page just to control these shizzles -->
+<div style="text-align:center">
+  <h1>
+    Welcome to {{title}}!
+  </h1>
+</div>
+<h2>Here are some links to help you start: </h2>
+<user-detail [user]="{ 'name': 'pokemon', 'score': 3 }"></user-detail>
+<!-- Ends HERE -->
+
+
+<!-- This component will primarily control where we are, need to create another for main page.  -->
+<!--Also needs to create a search page. Main page in Index, which will show trendng games and stuff :) --> 
+
+
+
+<!-- Need to create a 'Game' Page for whatever game is selected -->

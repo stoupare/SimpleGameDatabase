@@ -1,0 +1,10 @@
+
+export class Channel {
+  type: string; 
+  name: string;
+  description: string;
+  iconUrl: string;
+  latestVideo: string;
+
+  stats: Array<{ subs: number, likes: number, uploads: number}>;
+}
