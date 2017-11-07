@@ -1,9 +1,9 @@
-  <div *ngIf="user" class = "user-nav-bar">
-  	<div class= user-icon-image> </div>
+  <div *ngIf="user" class = "user-nav-bar inline-block">
+  	<div class= user-icon-image in> </div>
     	<div class = "user-navbar-data">
     		<h2 class = 'user-name center'>{{user.name}} </h2>
-      		<div style = "display:inline;"> <h4> HP: </h4><div class = "hp"></div></div>
-      		<div style = "display:inline;"> <h4> MP: </h4><div class = "mp"></div></div>
+      		<div style = "display:inline;"> <h4 class = "inline-block"> HP: </h4><div class = "hp inline-block"></div></div>
+      		<div > <h4 class = "inline-block"> MP: </h4><div class = "mp inline-block"></div></div>
 
       		<div class = "user-controls">
   			<a href = "#"> Log out </a>

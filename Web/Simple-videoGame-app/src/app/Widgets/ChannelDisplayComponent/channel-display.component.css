@@ -1,0 +1,45 @@
+   
+.channel-box {
+    border-bottom: 1px solid #eeeeee;
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+}
+
+.channel-box: hover {
+	background-color: #7289da
+}
+
+.channel-box h3 {
+	display:inline-block;
+}
+
+.channel-box div {
+	max-width: 50%;
+	margin-right: 15px;
+}
+.channel-box div p {
+	overflow: hidden;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.channel-img {
+	display: inline-block;
+    width: 137px;
+    height: 137px;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    background-image: url("http://allaboutwindowsphone.com/images/appicons/212364.png");
+}
+
+.channel-img-type {
+	width:50px;
+	display: inline-block;
+}
+
+.inline-block {
+	display: inline-block;
+}
+

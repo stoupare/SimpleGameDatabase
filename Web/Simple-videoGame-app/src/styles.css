@@ -1,1 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+.txt-slabo {
+	font-family: 'Slabo 27px', serif;
+}
+
+.txt-sans {
+	font-family: 'Open Sans', sans-serif;
+}

@@ -19,12 +19,11 @@
 	height: 64px;
 	border-radius: 64px;
 	border: 3px solid black;
-	background-image: url("/../assets/images/navbar/user-icon.png");  //Temporary
+	background-image: url("/../assets/images/navbar/user-icon.png");
 	display: inline-block;
 }
 
 .user-name {
-	display: inline-block;
 	vertical-align: top;
 	font-size: medium;
 
@@ -46,4 +45,8 @@
 
 .user-controls {
 	float:right;
+}
+
+.inline-block {
+	display: inline-block;
 }

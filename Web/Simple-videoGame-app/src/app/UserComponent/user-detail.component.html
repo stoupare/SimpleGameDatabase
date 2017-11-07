@@ -1,9 +1,16 @@
     <div *ngIf="user">
       
       <!-- Basic Profile Information. Will contain profile image, username, contributor score?, favourite channels? etc. -->
+      <h2> Your Profile </h2>
+      <br>
       <img class = "user-detail-image" src = "/../assets/images/navbar/user-icon.png"> 
-      <h2 class = "user-detail-user">{{user.name}} Profile!</h2>
+      <h2 class = "user-detail-user">{{user.name}} Profile! {{chArray()}} </h2>
       <div class = "user-cont-score"><label>Contributor Score: </label>{{user.score}}</div>
-      <div class = "user-det-fav-chan"><label>Favorite Channels: </label><p ng-repeat ="channel in user.channels">{{channel}}</div>
+      <div class = "user-det-fav-chan"><label>Favorite Channels: </label>
+      		<div *ngFor ="let chn of user.channels" style="padding-bottom:5px">
+      			<channel-display [channel]= "chn"> </channel-display>		
+      			
+      		</div>
+  	  </div>
 
     </div>
